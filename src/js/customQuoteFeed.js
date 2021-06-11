@@ -60,24 +60,6 @@ customQuoteFeed.fetchInitialData = function (symbol,suggestedStartDate,suggested
 	});
 };
 
-// customQuoteFeed.fetchUpdateData = function (symbol, startDate, params, cb) {
-// 	console.log("before update ajax call ")
-// 	  customQuoteFeed.postAjax(customQuoteFeed.url, req , function (status, response) {
-// 		if (status == 200) {
-// 			// customQuoteFeed.formatChartData(response, symbol);
-// 			// console.log("RESPONSE INSIDE UPDATE : ",response)
-// 			var newQuotes = customQuoteFeed.formatChartData(response, symbol);
-// 			cb({
-// 				quotes: newQuotes,
-// 				// moreAvailable: true,
-// 				// attribution: { source: "simulator", exchange: "RANDOM" }
-// 			}); 
-// 		} else {
-// 			// else error response from datafeed
-// 			cb({ error: response ? response : status }); // specify error in callback
-// 		}
-// 	});
-// };
 customQuoteFeed.fetchPaginationData = function (symbol,suggestedStartDate,endDate,params,cb) {
 	var req = {
 		"request": {
@@ -103,9 +85,6 @@ customQuoteFeed.fetchPaginationData = function (symbol,suggestedStartDate,endDat
 			"appID": "5b69646dfd6aaa2a8ed730d47cfb7f6e"
 		  }
 	}
-// customQuoteFeed.fetchPaginationData = function () {
-	console.log("before pagination ajax call>>>> ")
-
 		customQuoteFeed.postAjax(customQuoteFeed.url ,req , function (status, response) {
 		if (status == 200) {
 			var newQuotes = customQuoteFeed.formatChartData(response, symbol);
@@ -120,18 +99,16 @@ customQuoteFeed.fetchPaginationData = function (symbol,suggestedStartDate,endDat
 	});
 };
 
-var data = [];
 
 customQuoteFeed.formatChartData = function (response, symbol) {
 	console.log("INSIDE FUNCTION FORMAT -")
 	var feeddata = JSON.parse(response);
 	var newQuotes = []
-
-	
-		console.log("FEED DATA....>>>>>>>>>>>>>>>>>>>>>>>>>",feeddata.data)
-		if(feeddata.data === 'undefined'){
-			console.log("NO DATA AVAILABLE ...")
-		}else{
+	var data = []
+		// console.log("FEED DATA....>>>>>>>>>>>>>>>>>>>>>>>>>",feeddata.data)
+		// if(feeddata.data === 'undefined'){
+		// 	console.log("NO DATA AVAILABLE ...")
+		// }else{
 			data = feeddata.response.data.dataPoints;
 			console.log("Inside ELSE part ")
 		for(var j =0 ; j< data.length ;j++){
@@ -147,8 +124,9 @@ customQuoteFeed.formatChartData = function (response, symbol) {
 			newQuotes.push(newObj);
 			console.log("NEW QUOTE OBJECTS ARRAY..FORMAT. ",newQuotes);
 		}
-}
+	// }
 	return newQuotes
 };
+
 
 export default customQuoteFeed;

@@ -242,6 +242,22 @@ const config = getDefaultConfig({
 });
 
 let stxx = config.createChart();
+
+stxx.addEventListener("theme",function (tObj) {
+	CIQ.alert("THEME CHANGED FOR SYMBOL ..."+tObj.symbol);
+})
+
+stxx.addEventListener("longhold", function(lhObjectss) {
+    CIQ.alert("LONG HOLD EVENT at X : " + lhObjectss.x + " Y : "+ lhObjectss.y);
+});
+
+
+
+
+
+
+
+
 // stxx.loadChart("MSFT");
 
 // Simulate L2 data
